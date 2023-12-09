@@ -1,12 +1,16 @@
 package com.ozturksahinyetisir.composeexample.presentation.SearchScreen
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
+import com.google.gson.Gson
+import com.ozturksahinyetisir.composeexample.MyApp
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
 @OptIn(FlowPreview::class)
-class SearchViewModel: ViewModel() {
+class SearchViewModel : ViewModel() {
 
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
@@ -17,9 +21,9 @@ class SearchViewModel: ViewModel() {
     private val _heroes = MutableStateFlow(allHeroes)
     val heroes = searchText
         .debounce(400L)
-        .onEach { _isSearching.update { true } }
+        .onEach { _isSearching.value = true }
         .combine(_heroes) { text, heroes ->
-            if(text.isBlank()) {
+            if (text.isBlank()) {
                 heroes
             } else {
                 delay(400L)
@@ -28,7 +32,7 @@ class SearchViewModel: ViewModel() {
                 }
             }
         }
-        .onEach { _isSearching.update { false } }
+        .onEach { _isSearching.value = false }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(800),
@@ -38,62 +42,16 @@ class SearchViewModel: ViewModel() {
     fun onSearchTextChange(text: String) {
         _searchText.value = text
     }
-    companion object {
-        private val heroNames = listOf(
-            "Abaddon",
-            "Alchemist",
-            "Ancient Apparition",
-            "Anti-Mage",
-            "Arc Warden",
-            "Bane",
-            "Batrider",
-            "Beastmaster",
-            "Bloodseeker",
-            "Bounty Hunter",
-            "Brewmaster",
-            "Bristleback",
-            "Broodmother",
-            "Centaur Warrunner",
-            "Chaos Knight",
-            "Chen",
-            "Clinkz",
-            "Clockwerk",
-            "Crystal Maiden",
-            "Dark Seer",
-            "Dazzle",
-            "Death Prophet",
-            "Disruptor",
-            "Doom",
-            "Dragon Knight",
-            "Drow Ranger",
-            "Earth Spirit",
-            "Earthshaker",
-            "Elder Titan",
-            "Ember Spirit",
-            "Enchantress",
-            "Enigma",
-            "Faceless Void",
-            "Grimstroke",
-            "Gyrocopter",
-            "Huskar",
-            "Invoker",
-            "Io",
-            "Jakiro",
-            "Juggernaut",
-            "Keeper of the Light",
-            "Kunkka",
-            "Legion Commander",
-            "Leshrac",
-            "Lich",
-            "Lifestealer",
-            "Lina",
-            "Lion",
-            "Lone Druid",
-            "Luna"
-        )
 
-        val allHeroes = heroNames.map { Hero(name = it) }
-        val allHeroesFlow = MutableStateFlow(allHeroes)
+    companion object {
+        val allHeroes: List<Hero> by lazy {
+            readHeroesFromAssets(MyApp.context)
+        }
+        private fun readHeroesFromAssets(context: Context): List<Hero> {
+            val json = context.assets.open("heroes.json").bufferedReader().use { it.readText() }
+            val heroesType = object : TypeToken<List<Hero>>() {}.type
+            return Gson().fromJson(json, heroesType)
+        }
     }
 }
 
