@@ -1,4 +1,4 @@
-package com.ozturksahinyetisir.composeexample.presentation.SearchScreen
+package com.ozturksahinyetisir.composeexample.presentation.Search
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -54,11 +54,10 @@ class SearchViewModel : ViewModel() {
         }
     }
 }
-
 data class Hero(val name: String) {
     fun doesMatchSearchQuery(query: String): Boolean {
         val matchingCombinations = listOf(
-            "$name",
+            name,
             "$name ",
             "${name.first()}",
         )

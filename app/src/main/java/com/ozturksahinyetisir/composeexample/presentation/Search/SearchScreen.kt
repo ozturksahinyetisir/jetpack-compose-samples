@@ -1,4 +1,4 @@
-package com.ozturksahinyetisir.composeexample.presentation.SearchScreen
+package com.ozturksahinyetisir.composeexample.presentation.Search
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen() {
@@ -54,7 +53,7 @@ fun SearchScreen() {
                 ) {
                     items(heroes) { heroes ->
                         Text(
-                            text = "${heroes.name}",
+                            text = heroes.name,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 16.dp)
