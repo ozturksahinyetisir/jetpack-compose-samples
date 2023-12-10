@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ozturksahinyetisir.composeexample.presentation.Home.HomeScreen
 import com.ozturksahinyetisir.composeexample.presentation.Search.SearchScreen
+import com.ozturksahinyetisir.composeexample.presentation.Slider.SliderScreen
 
 @Composable
 fun NavigationContainer(navController:NavHostController,
@@ -16,6 +17,9 @@ fun NavigationContainer(navController:NavHostController,
         }
         composable("search_screen"){
             SearchScreen()
+        }
+        composable("slider_screen"){
+            SliderScreen()
         }
     }
 }

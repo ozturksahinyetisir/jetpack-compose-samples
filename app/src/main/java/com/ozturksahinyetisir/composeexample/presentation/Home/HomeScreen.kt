@@ -26,6 +26,14 @@ fun HomeScreen(navController: NavController) {
         ) {
             Text("Search Screen")
         }
+        OutlinedButton(
+            onClick = { navController.navigate("slider_screen") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(46.dp)
+        ) {
+            Text("Slider Screen")
+        }
     }
 
 }
