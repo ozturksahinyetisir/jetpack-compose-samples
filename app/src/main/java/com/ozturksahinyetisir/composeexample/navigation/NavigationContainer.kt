@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.ozturksahinyetisir.composeexample.presentation.Home.HomeScreen
 import com.ozturksahinyetisir.composeexample.presentation.Search.SearchScreen
 import com.ozturksahinyetisir.composeexample.presentation.Slider.SliderScreen
+import com.ozturksahinyetisir.composeexample.presentation.WebView.WebViewScreen
 
 @Composable
 fun NavigationContainer(navController:NavHostController,
@@ -20,6 +21,9 @@ fun NavigationContainer(navController:NavHostController,
         }
         composable("slider_screen"){
             SliderScreen()
+        }
+        composable("web_view_screen"){
+            WebViewScreen()
         }
     }
 }

@@ -22,7 +22,7 @@ fun HomeScreen(navController: NavController) {
             onClick = { navController.navigate("search_screen") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(46.dp)
+                .padding(26.dp)
         ) {
             Text("Search Screen")
         }
@@ -30,9 +30,17 @@ fun HomeScreen(navController: NavController) {
             onClick = { navController.navigate("slider_screen") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(46.dp)
+                .padding(26.dp)
         ) {
             Text("Slider Screen")
+        }
+        OutlinedButton(
+            onClick = { navController.navigate("web_view_screen") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(26.dp)
+        ) {
+            Text("WebView Screen")
         }
     }
 
