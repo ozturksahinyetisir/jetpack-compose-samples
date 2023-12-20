@@ -1,10 +1,7 @@
 package com.ozturksahinyetisir.composeexample.presentation.Search
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
-import com.google.gson.Gson
-import com.ozturksahinyetisir.composeexample.MyApp
+import com.ozturksahinyetisir.composeexample.data.repository.HeroesRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -18,7 +15,7 @@ class SearchViewModel : ViewModel() {
     private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
-    private val _heroes = MutableStateFlow(allHeroes)
+    private val _heroes = MutableStateFlow(HeroesRepository.allHeroes)
     val heroes = searchText
         .debounce(400L)
         .onEach { _isSearching.value = true }
@@ -28,7 +25,7 @@ class SearchViewModel : ViewModel() {
             } else {
                 delay(400L)
                 heroes.filter {
-                    it.doesMatchSearchQuery(text)
+                    doesMatchSearchQuery(it.name,text)
                 }
             }
         }
@@ -42,20 +39,7 @@ class SearchViewModel : ViewModel() {
     fun onSearchTextChange(text: String) {
         _searchText.value = text
     }
-
-    companion object {
-        val allHeroes: List<Hero> by lazy {
-            readHeroesFromAssets(MyApp.context)
-        }
-        private fun readHeroesFromAssets(context: Context): List<Hero> {
-            val json = context.assets.open("heroes.json").bufferedReader().use { it.readText() }
-            val heroesType = object : TypeToken<List<Hero>>() {}.type
-            return Gson().fromJson(json, heroesType)
-        }
-    }
-}
-data class Hero(val name: String) {
-    fun doesMatchSearchQuery(query: String): Boolean {
+    private fun doesMatchSearchQuery(name: String, query: String): Boolean {
         val matchingCombinations = listOf(
             name,
             "$name ",

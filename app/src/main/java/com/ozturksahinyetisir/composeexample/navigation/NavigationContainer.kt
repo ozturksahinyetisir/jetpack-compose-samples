@@ -8,7 +8,8 @@ import com.ozturksahinyetisir.composeexample.presentation.Home.HomeScreen
 import com.ozturksahinyetisir.composeexample.presentation.Search.SearchScreen
 import com.ozturksahinyetisir.composeexample.presentation.Slider.SliderScreen
 import com.ozturksahinyetisir.composeexample.presentation.WebView.WebViewScreen
-
+import com.ozturksahinyetisir.composeexample.presentation.Dropdown.DropdownScreen
+import com.ozturksahinyetisir.composeexample.presentation.Dropdown.DropdownScreen2
 @Composable
 fun NavigationContainer(navController:NavHostController,
 ){
@@ -24,6 +25,12 @@ fun NavigationContainer(navController:NavHostController,
         }
         composable("web_view_screen"){
             WebViewScreen()
+        }
+        composable("dropdown_screen"){
+            DropdownScreen()
+        }
+        composable("dropdown2_screen"){
+            DropdownScreen2()
         }
     }
 }

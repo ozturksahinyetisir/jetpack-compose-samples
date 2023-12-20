@@ -35,8 +35,6 @@ class SliderViewModel @Inject constructor() : ViewModel() {
             editor.apply()
         }
     }
-
-
         private fun loadSliderValue() {
         sharedPreferences?.let {
             _sliderValue.value = it.getFloat("sliderValue", 0f)

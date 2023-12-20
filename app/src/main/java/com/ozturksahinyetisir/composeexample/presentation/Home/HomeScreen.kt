@@ -2,6 +2,7 @@ package com.ozturksahinyetisir.composeexample.presentation.Home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.OutlinedButton
@@ -9,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
@@ -22,7 +24,7 @@ fun HomeScreen(navController: NavController) {
             onClick = { navController.navigate("search_screen") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(26.dp)
+                .padding(25.dp)
         ) {
             Text("Search Screen")
         }
@@ -30,7 +32,7 @@ fun HomeScreen(navController: NavController) {
             onClick = { navController.navigate("slider_screen") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(26.dp)
+                .padding(25.dp)
         ) {
             Text("Slider Screen")
         }
@@ -38,9 +40,27 @@ fun HomeScreen(navController: NavController) {
             onClick = { navController.navigate("web_view_screen") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(26.dp)
+                .padding(25.dp)
         ) {
             Text("WebView Screen")
+        }
+        Row(){
+            OutlinedButton(
+                onClick = { navController.navigate("dropdown_screen") },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(25.dp)
+            ) {
+                Text("Dropdown Screen", textAlign = TextAlign.Center)
+            }
+            OutlinedButton(
+                onClick = { navController.navigate("dropdown2_screen") },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(25.dp)
+            ) {
+                Text("Dropdown2 Screen", textAlign = TextAlign.Center)
+            }
         }
     }
 
