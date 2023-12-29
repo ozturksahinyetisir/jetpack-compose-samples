@@ -10,6 +10,9 @@ import com.ozturksahinyetisir.composeexample.presentation.Slider.SliderScreen
 import com.ozturksahinyetisir.composeexample.presentation.WebView.WebViewScreen
 import com.ozturksahinyetisir.composeexample.presentation.Dropdown.DropdownScreen
 import com.ozturksahinyetisir.composeexample.presentation.Dropdown.DropdownScreen2
+import com.ozturksahinyetisir.composeexample.presentation.Progress.ProgressScreen
+import com.ozturksahinyetisir.composeexample.presentation.TopAppBar.TopAppBarScreen
+
 @Composable
 fun NavigationContainer(navController:NavHostController,
 ){
@@ -31,6 +34,12 @@ fun NavigationContainer(navController:NavHostController,
         }
         composable("dropdown2_screen"){
             DropdownScreen2()
+        }
+        composable("progress_screen"){
+            ProgressScreen()
+        }
+        composable("top_app_bar_screen"){
+            TopAppBarScreen()
         }
     }
 }

@@ -62,6 +62,22 @@ fun HomeScreen(navController: NavController) {
                 Text("Dropdown2 Screen", textAlign = TextAlign.Center)
             }
         }
+        OutlinedButton(
+            onClick = { navController.navigate("progress_screen") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(25.dp)
+        ) {
+            Text("Progress Screen", textAlign = TextAlign.Center)
+        }
+        OutlinedButton(
+            onClick = { navController.navigate("top_app_bar_screen") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(25.dp)
+        ) {
+            Text("Top App Bar Screen", textAlign = TextAlign.Center)
+        }
     }
 
 }
